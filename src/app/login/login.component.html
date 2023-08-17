@@ -1,0 +1,49 @@
+<div class="containerLogin">
+  <div class="containerLogin__content" [@fadeInOut]="showRegister ? 'visible' : 'hidden'">
+    <div class="containerLogin__content--title">
+      <h2><i>Sensores</i></h2>
+    </div>
+    <form class="containerLogin__content--form" (ngSubmit)="login()" #loginForm="ngForm">
+      <div class="content">
+        <label class="center-text"><i><b>Correo :</b></i></label>
+        <input type="email" name="email" [(ngModel)]="email" required>
+        <div class="error-message-dark" *ngIf="loginEmailError">El correo es requerido.</div>
+      </div>
+      <div class="content">
+        <label class="center-text"><i><b>Contraseña :</b></i></label>
+        <input type="password" name="password" [(ngModel)]="password" required>
+        <div class="error-message-dark" *ngIf="loginPasswordError">La contraseña es requerida.</div>
+      </div>
+      <button type="submit"><i><b>Iniciar Sesion</b></i></button>
+      <button (click)="showRegister = true"><i><b>Registrarse</b></i></button>
+    </form>
+  </div>
+  <div class="containerLogin__content" [@fadeInOut]="showRegister ? 'hidden' : 'visible'" *ngIf="showRegister">
+    <div class="containerLogin__content--title">
+      <h2><i>Registro</i></h2>
+    </div>
+    <form class="containerLogin__content--form" (ngSubmit)="register()" #registerForm="ngForm">
+      <div class="content">
+        <label class="center-text"><i><b>Nombre :</b></i></label>
+        <input type="text" name="name" [(ngModel)]="registerName" required>
+        <div class="error-message-dark" *ngIf="registerNameError">El nombre es requerido.</div>
+      </div>
+      <div class="content">
+        <label class="center-text"><i><b>Correo :</b></i></label>
+        <input type="email" name="email" [(ngModel)]="registerEmail" required>
+        <div class="error-message-dark" *ngIf="registerEmailError">El correo es requerido.</div>
+      </div>
+      <div class="content">
+        <label class="center-text"><i><b>Contrseña :</b></i></label>
+        <input type="password" name="password" [(ngModel)]="registerPassword" required>
+        <div class="error-message-dark" *ngIf="registerPasswordError">La contraseña es requerida.</div>
+      </div>
+      <button type="submit"><i><b>Registrarse</b></i></button>
+      <button (click)="backToLogin()"><i><b>Volver al Inicio de Sesión</b></i></button>
+    </form>
+  </div>
+</div>
+<div class="loading-spinner" *ngIf="loading">
+  <div class="overlay"></div>
+  <mat-spinner diameter="50"></mat-spinner>
+</div>

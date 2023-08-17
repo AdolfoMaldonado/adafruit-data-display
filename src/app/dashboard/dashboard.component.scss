@@ -1,0 +1,40 @@
+.body {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    .content {
+        padding: 1rem;
+        .title {
+            color: #0c1e35;
+            font-weight: bold;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(33.33% - 20px);
+            padding: 20px;
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+
+            .card-header {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .card-body {
+                font-size: 14px;
+            }
+        }
+    }
+}

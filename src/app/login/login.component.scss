@@ -1,0 +1,148 @@
+.containerLogin {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    //background-image: url('../png/fondo escuela.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-items: center;
+    .containerLogin__content {
+        padding: 2rem 3rem;
+        margin: 0 2vh;
+        border-radius: 10px;
+        box-shadow:
+            rgba(255, 255, 255, 0.493) 0px 1px 3px,
+            rgba(255, 255, 255, 0.493) 0px 1px 2px;
+        background-color: rgba(0, 0, 0, 0.445);
+        .containerLogin__content--title {
+            color: black;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            h2 {
+                text-align: center;
+                border-bottom: 1px solid black;
+                width: 50%;
+            }
+        }
+        .containerLogin__content--form {
+            display: flex;
+            flex-direction: column;
+            .content {
+                display: flex;
+                flex-direction: column;
+                label {
+                    color: black;
+                    font-size: 18px;
+                    margin-top: 2vh;
+                }
+                input {
+                    border-radius: 10px;
+                    border: none;
+                    margin-top: 1vh;
+                    width: 50vh;
+                    box-shadow:
+                        rgba(0, 0, 0, 0.12) 0px 1px 3px,
+                        rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                    padding: 1vh;
+                }
+            }
+
+            .error-message-dark {
+                color: #ff4444; /* Color negro oscuro (#333) - Puedes cambiarlo por el color que desees */
+              }
+
+           
+
+  
+            button {
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                background-color: rgb(230, 255, 1);
+                box-shadow:
+                    rgba(0, 0, 0, 0.12) 0px 1px 3px,
+                    rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                margin-top: 3vh;
+                padding: 1vh;
+            }
+            button:nth-of-type(2) {
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                color: white;
+                background-color: rgba(255, 0, 0, 0.781);
+                box-shadow:
+                    rgba(0, 0, 0, 0.12) 0px 1px 3px,
+                    rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                margin-top: 3vh;
+                padding: 1vh;
+            }
+        }
+    }
+    .containerLogin__content:nth-of-type(2) {
+        border-radius: 10px;
+        box-shadow:
+            rgba(0, 0, 0, 0.493) 0px 1px 3px,
+            rgba(0, 0, 0, 0.459) 0px 1px 2px;
+        .containerLogin__content--title {
+            text-align: center;
+        }
+        .containerLogin__content--form {
+            display: flex;
+            flex-direction: column;
+            .content {
+                display: flex;
+                flex-direction: column;
+                input {
+                    border-radius: 10px;
+                    border: none;
+                    box-shadow:
+                        rgba(0, 0, 0, 0.12) 0px 1px 3px,
+                        rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                    padding: 1vh;
+                }
+            }
+
+            .error-message-dark {
+                color: #ff4444; /* Color negro oscuro (#333) - Puedes cambiarlo por el color que desees */
+              }
+            button {
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                background-color: rgb(255, 0, 0, 0.781);
+                color: white;
+                box-shadow:
+                    rgba(0, 0, 0, 0.12) 0px 1px 3px,
+                    rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                margin-top: 3vh;
+                padding: 1vh;
+            }
+        }
+    }
+}
+.loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.mat-spinner {
+    color: #ffffff; /* Color del spinner (blanco en este caso) */
+}
+
+// centralizar texto dentro de los labels
+.center-text {
+    text-align: center;
+  }
+  

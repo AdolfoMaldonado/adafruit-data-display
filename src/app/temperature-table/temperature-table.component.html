@@ -1,1 +1,17 @@
-<p>temperature-table works!</p>
+<table class="data-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Último Valor</th>
+        <th>Creado En</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td>{{ item.name }}</td>
+        <td>{{ item.last_value }}</td>
+        <td>{{ item.created_at }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

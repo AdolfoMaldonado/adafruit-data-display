@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  selector: 'app-temperature-table',
-  templateUrl: './temperature-table.component.html',
-  styleUrls: ['./temperature-table.component.scss'],
+  selector: 'app-sound-table',
+  templateUrl: './sound-table.component.html',
+  styleUrls: ['./sound-table.component.scss'],
 })
-export class TemperatureTableComponent implements OnInit {
+export class SoundTableComponent implements OnInit {
   data: any[] = [];
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     const token = 'aio_VNUu86WQDHb21sst8vXe0VWC2AgO'; // Reemplaza con tu token
-    const feed = 'temperatura';
+    const feed = 'sonido';
 
     const headers = new HttpHeaders({
       'X-AIO-key': token,
