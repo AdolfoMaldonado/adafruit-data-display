@@ -11,7 +11,7 @@ export interface Data {
   expiration: string;
 }
 @Component({
-  selector: 'app-humedad',
+  selector: 'app-humidity-table',
   templateUrl: './humidity-table.component.html',
   styleUrls: ['./humidity-table.component.scss'],
 })
