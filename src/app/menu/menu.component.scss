@@ -1,0 +1,42 @@
+.navbar {
+  position: fixed; /* Fijar el navbar en la parte superior */
+  top: 0;
+  left: 0;
+  width: 100%; /* Extender el navbar en toda la página */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #ffffff;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+
+    &-text {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+
+  &__links {
+    display: flex;
+
+    &-link {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 10px;
+
+      mat-icon {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+/* Asegurarnos de que el contenido no esté oculto detrás del navbar */
+.body {
+  padding-top: 60px; /* Altura del navbar */
+}

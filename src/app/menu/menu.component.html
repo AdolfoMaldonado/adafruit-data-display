@@ -1,14 +1,12 @@
-<section class="body">
-    <div class="body__rightMenu">
-        <div class="info">
-            <p>Sensores</p>
-        </div>
-        <a routerLink="/dashboard"><mat-icon>home</mat-icon>Home</a>
-
-        <p class="subTitle">Sensores</p>
-        <a routerLink="/temperatura">Temperatura</a>
-        <a routerLink="/humedad">Humedad</a>
-        <a routerLink="/lluvia">lluvia</a>
-        <a routerLink="/sonido">Sonido</a>
+<nav class="navbar">
+    <div class="navbar__logo">
+        <p class="navbar__logo-text">Sensores</p>
     </div>
-</section>
+    <div class="navbar__links">
+        <a routerLink="/dashboard" class="navbar__link"><mat-icon>home</mat-icon>Home</a>
+        <a routerLink="/temperatura" class="navbar__link">Temperatura</a>
+        <a routerLink="/humedad" class="navbar__link">Humedad</a>
+        <a routerLink="/lluvia" class="navbar__link">Lluvia</a>
+        <a routerLink="/sonido" class="navbar__link">Sonido</a>
+    </div>
+</nav>

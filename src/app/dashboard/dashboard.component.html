@@ -1,17 +1,20 @@
 <section class="body">
     <div class="leftMenu">
-        <app-menu></app-menu>
+      <app-menu></app-menu>
     </div>
     <div class="content">
-        <p class="title">Dashboard</p>
+      <div class="dashboard">
+        <p class="dashboard-title">Dashboard</p>
         <div class="data-container">
-            <div class="value-container">
-                <p>Temperatura - Último Valor: {{ getLatestValue('temperatura') }}</p>
-                <p>Humedad - Último Valor: {{ getLatestValue('humedad') }}</p>
-                <p>Distancia - Último Valor: {{ getLatestValue('lluvia') }}</p>
-                <p>Sonido - Último Valor: {{ getLatestValue('sonido') }}</p>
-            </div>
+          <div class="value-container">
+            <p>Temperatura - Último Valor: {{ getLatestValue('temperatura') }}</p>
+            <p>Humedad - Último Valor: {{ getLatestValue('humedad') }}</p>
+            <p>LLuvia - Último Valor: {{ getLatestValue('lluvia') }}</p>
+            <p>Sonido - Último Valor: {{ getLatestValue('sonido') }}</p>
+          </div>
         </div>
+      </div>
+      <!-- Resto de tu contenido -->
     </div>
-</section>
-
+  </section>
+  
