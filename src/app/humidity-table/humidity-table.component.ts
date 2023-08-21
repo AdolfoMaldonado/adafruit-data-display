@@ -10,7 +10,7 @@ export interface FeedData {
   expiration: string;
 }
 @Component({
-  selector: 'app-gases',
+  selector: 'app-humedad',
   templateUrl: './humidity-table.component.html',
   styleUrls: ['./humidity-table.component.scss'],
 })

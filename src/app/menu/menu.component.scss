@@ -1,42 +1,59 @@
 .navbar {
-  position: fixed; /* Fijar el navbar en la parte superior */
-  top: 0;
-  left: 0;
-  width: 100%; /* Extender el navbar en toda la página */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: #ffffff;
-
-  &__logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #553c2585;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .navbar__links {
     display: flex;
     align-items: center;
-
-    &-text {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 0;
+    width: 100%;
+    padding: 0 20px;
+    overflow-x: auto;
+  }
+  
+  .navbar__link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s;
+  
+    &:hover {
+      color: #f39c12;
     }
   }
+  
+  .navbar__divider {
+    width: 1px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 0 10px;
+  }
 
-  &__links {
+  .navbar__logo {
+    width: 100px; /* Ajusta el ancho deseado para el contenedor del logo */
     display: flex;
-
-    &-link {
-      color: #ffffff;
-      text-decoration: none;
-      margin: 0 10px;
-
-      mat-icon {
-        margin-right: 5px;
-      }
-    }
+    align-items: center;
   }
-}
-
-/* Asegurarnos de que el contenido no esté oculto detrás del navbar */
-.body {
-  padding-top: 60px; /* Altura del navbar */
-}
+  
+  .logo-image {
+    max-width: 100%; /* La imagen se ajustará al ancho del contenedor */
+    height: auto; /* La altura se ajustará automáticamente */
+    margin: 0; /* Elimina los márgenes */
+    padding: 0; /* Elimina el padding */
+  }
+  
+  /* Resto de tus estilos para el navbar */
+  
+  

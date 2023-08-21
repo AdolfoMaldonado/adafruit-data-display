@@ -1,20 +1,33 @@
 <section class="body">
     <div class="leftMenu">
-      <app-menu></app-menu>
+        <app-menu></app-menu>
     </div>
     <div class="content">
-      <div class="dashboard">
-        <p class="dashboard-title">Dashboard</p>
         <div class="data-container">
-          <div class="value-container">
-            <p>Temperatura - Último Valor: {{ getLatestValue('temperatura') }}</p>
-            <p>Humedad - Último Valor: {{ getLatestValue('humedad') }}</p>
-            <p>LLuvia - Último Valor: {{ getLatestValue('lluvia') }}</p>
-            <p>Sonido - Último Valor: {{ getLatestValue('sonido') }}</p>
-          </div>
+            <h2 class="table-title">Sensores</h2> <!-- Agregado el título aquí -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <p>Temperatura: {{ getLatestValue('temperatura') }}&deg;</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <p>Humedad: {{ getLatestValue('humedad') }}</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <p>Sonido: {{ getLatestValue('sonido') }}</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <p>Lluvia: {{ getLatestValue('lluvia') }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <!-- Resto de tu contenido -->
+        
+        <div class="btns">
+            <button class="update-btn" (click)="updateData()">Actualizar Datos</button>
+            <button class="update-btn" (click)="changeInterval(30000)">30s</button>
+            <button class="update-btn" (click)="changeInterval(15000)">15s</button>
+            <button class="update-btn" (click)="changeInterval(120000)">2min</button>
+        </div>
     </div>
-  </section>
-  
+</section>

@@ -9,7 +9,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   styleUrls: ['./login.component.scss'],
   animations: [
     trigger('fadeInOut', [
-      state('visible', style({ opacity: 0 })), // Estado inicial
+      state('visible', style({ opacity: 0 })), // Estado inicials
       state('hidden', style({ opacity: 1 })), // Estado final
       transition('visible => hidden', animate('100ms')),
       transition('hidden => visible', animate('300ms')),
@@ -35,6 +35,7 @@ export class LoginComponent {
   registerEmail: string = '';
   registerPassword: string = '';
   registerName: string = '';
+  apiKey: string = ''; // Variable para almacenar la API Key
 
   constructor(private authService: AuthService, private router: Router) {}
 
