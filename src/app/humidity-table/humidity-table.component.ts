@@ -16,6 +16,7 @@ export interface FeedData {
 })
 export class HumidityTableComponent implements OnInit {
   feedData: FeedData[] = [];
+  
 
   constructor(private http: HttpClient) {}
 

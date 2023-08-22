@@ -3,27 +3,45 @@
         <app-menu></app-menu>
     </div>
     <div class="content">
+        <h2 class="table-title">Sensores</h2>
         <div class="data-container">
-            <h2 class="table-title">Sensores</h2> <!-- Agregado el título aquí -->
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <p>Temperatura: {{ getLatestValue('temperatura') }}</p>
+                        <div class="data-box">
+                            <p class="data-title">Temperatura</p>
+                            <img src="assets/imagen/temperatura.jpg" alt="Temperatura" class="sensor-image">
+                            <p class="data-value">{{ getLatestValue('temperatura') }}&deg;</p>
+                        </div>
+                        <div class="data-box">
+                            <p class="data-title">Humedad</p>
+                            <img src="assets/imagen/humedad.jpg" alt="Humedad" class="sensor-image">
+                            <p class="data-value">{{ getLatestValue('humedad') }}</p>
+                        </div>
                     </div>
                     <div class="swiper-slide">
-                        <p>Humedad: {{ getLatestValue('humedad') }}</p>
+                        <div class="data-box">
+                            <p class="data-title">Sonido</p>
+                            <img src="assets/imagen/sonido.png" alt="Sonido" class="sensor-image">
+                            <p class="data-value">{{ getLatestValue('sonido') }}</p>
+                        </div>
+                        <div class="data-box">
+                            <p class="data-title">Lluvia</p>
+                            <img src="assets/imagen/lluvia.jpg" alt="Lluvia" class="sensor-image">
+                            <p class="data-value">{{ getLatestValue('lluvia') }}</p>
+                        </div>
                     </div>
                     <div class="swiper-slide">
-                        <p>Sonido: {{ getLatestValue('sonido') }}</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <p>Lluvia: {{ getLatestValue('lluvia') }}</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <p>Proximidad: {{ getLatestValue('proximidad') }}</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <p>Luminosidad: {{ getLatestValue('luminosidad') }}</p>
+                        <div class="data-box">
+                            <p class="data-title">Proximidad</p>
+                            <img src="assets/imagen/proximidad.jpg" alt="Humedad" class="sensor-image">
+                            <p class="data-value">{{ getLatestValue('proximidad') }}</p>
+                        </div>
+                        <div class="data-box">
+                            <p class="data-title">Luminosidad</p>
+                            <img src="assets/imagen/luminosidad.jpg" alt="Humedad" class="sensor-image">
+                            <p class="data-value">{{ getLatestValue('luminosidad') }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

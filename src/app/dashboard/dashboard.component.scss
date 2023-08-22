@@ -5,52 +5,65 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
 
-    .content {
-        width: 80%;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        padding: 1rem;
+.content {
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-top: 16px;
 
-        .data-container {
-            .swiper-container {
-                width: 100%;
+    .data-container {
+        .swiper-container {
+            width: 100%;
 
-                .swiper-slide {
-                    background-color: #f8f8f8;
+            .swiper-slide {
+                display: flex;
+                justify-content: space-between; // Alinear los datos en dos columnas
+                background-color: #f8f8f8;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                padding: 20px;
+
+                .data-box {
+                    width: 45%; // Ajustar el ancho del cuadro de datos
+                    padding: 10px;
+                    background-color: white;
                     border-radius: 8px;
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                    margin-bottom: 20px;
-                    padding: 20px;
+                    display: flex;
+                    flex-direction: row; // Alinear contenido en fila
+                    align-items: center; // Centrar verticalmente
 
-                    p {
+
+                    .sensor-image {
+                        max-width: 30%; /* Ajustar el tamaño máximo de la imagen */
+                        height: auto;
+                        margin-left: 8px;
+                    }
+
+                    .data-title {
+                        font-size: 18px;
+                        margin-bottom: 8px;
+                    }
+
+                    .data-value {
                         font-size: 16px;
-                        margin: 10px 0;
                     }
                 }
             }
         }
+    }
 
-        .btns {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+    .table-title {
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
 
-            .update-btn {
-                background-color: #0c1e35;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-
-                &:hover {
-                    background-color: #0a182b;
-                }
-            }
-        }
+    .btns {
+        /* Estilos para los botones */
     }
 }

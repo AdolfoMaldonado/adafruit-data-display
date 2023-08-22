@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-export interface Data {
+export interface FeedData {
   id: string;
   value: string;
   feed_id: number;
@@ -11,30 +11,32 @@ export interface Data {
   expiration: string;
 }
 @Component({
-  selector: 'app-sound-table',
+  selector: 'app-sonido',
   templateUrl: './sound-table.component.html',
   styleUrls: ['./sound-table.component.scss'],
 })
 export class SoundTableComponent implements OnInit {
-  Data: Data[] = [];
-  DataFiltered: Data[] = [];
+  feedData: FeedData[] = [];
+  feedDataFiltered: FeedData[] = [];
 
-  createDate: string = '';
-  ExpirationDate: string = '';
-  StartDate: string = ''; 
-  EndDate: string = '';
+  selectedCreationDate: string = '';
+  selectedExpirationDate: string = '';
+  selectedStartDate: string = ''; // Agrega esta línea
+  selectedEndDate: string = '';
+  uniqueCreationDates: string[] = [];
+  uniqueExpirationDates: string[] = [];
   showSameDateError: boolean = false;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.getDataApi();
+    this.getDataFromApi();
     setInterval(() => {
-      this.getDataApi();
+      this.getDataFromApi();
     }, 7000);
   }
 
-  isFeedData2(value: any): value is Data {
+  isFeedData2(value: any): value is FeedData {
     return (
       'value' in value &&
       'feed_key' in value &&
@@ -43,30 +45,36 @@ export class SoundTableComponent implements OnInit {
     );
   }
 
-  getDataApi() {
+  getDataFromApi() {
     fetch('http://localhost:8000/api/datos/sonido', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     })
       .then((response) => response.json())
-      .then((data: { status: string; datos: Data[] }) => {
+      .then((data: { status: string; datos: FeedData[] }) => {
         if (data.status === 'ok') {
-          this.Data = data.datos;
-          this.Filters();
+          this.feedData = data.datos;
+          this.getUniqueDates(); // Actualizar fechas únicas
+          this.applyFilters();
+        } else {
+          // Manejar algún tipo de error si la respuesta no es 'ok'
         }
       })
+      .catch((error) => {
+        // Manejar errores en la solicitud
+      });
   }
-  Filters() {
-    console.log('Selected Start Date:', this.StartDate);
-    console.log('Selected End Date:', this.EndDate);
+  applyFilters() {
+    console.log('Selected Start Date:', this.selectedStartDate);
+    console.log('Selected End Date:', this.selectedEndDate);
 
-    const startDate = new Date(this.StartDate);
-    const endDate = new Date(this.EndDate);
+    const startDate = new Date(this.selectedStartDate);
+    const endDate = new Date(this.selectedEndDate);
 
     if (
-      this.StartDate &&
-      this.EndDate &&
+      this.selectedStartDate &&
+      this.selectedEndDate &&
       startDate.getTime() === endDate.getTime()
     ) {
       this.showSameDateError = true;
@@ -75,17 +83,27 @@ export class SoundTableComponent implements OnInit {
 
     this.showSameDateError = false;
 
-    this.DataFiltered = this.Data.filter((data) => {
+    this.feedDataFiltered = this.feedData.filter((data) => {
       const dataDate = new Date(data.created_at);
 
-      if (this.StartDate && dataDate < startDate) {
+      if (this.selectedStartDate && dataDate < startDate) {
         return false;
       }
-      if (this.EndDate && dataDate > endDate) {
+      if (this.selectedEndDate && dataDate > endDate) {
         return false;
       }
       return true;
     });
   }
-}
 
+  getUniqueDates() {
+    const uniqueCreationDates = new Set<string>();
+    const uniqueExpirationDates = new Set<string>();
+    for (const data of this.feedData) {
+      uniqueCreationDates.add(data.created_at);
+      uniqueExpirationDates.add(data.expiration);
+    }
+    this.uniqueCreationDates = Array.from(uniqueCreationDates);
+    this.uniqueExpirationDates = Array.from(uniqueExpirationDates);
+  }
+}

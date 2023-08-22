@@ -1,37 +1,49 @@
 <section class="body">
-  <div class="leftMenu">
-      <app-menu></app-menu>
-  </div>
-  <div class="content">
-      <p>Sonido</p>
-      <div class="contentData">
-          <div class="data-container">
-              <table>
-                  <thead>
-                      <tr>
-                          <th>Nombre</th>
-                          <th>Último Valor</th>
-                          <th>Fecha de Creación</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <ng-container *ngIf="DataFiltered.length > 0;">
-
-                          <tr *ngFor="let feed of Data | keyvalue">
-                              <ng-container *ngIf="isFeedData2(feed.value)">
-                                
-                                  <td>{{ feed.value.feed_key }}</td>
-                                  <td>{{ feed.value.value }}</td>
-                                  <td>{{ feed.value.created_at }}</td>
-                              </ng-container>
-                          </tr>
-                      </ng-container>
-                  </tbody>
-              </table>
-          </div>
-          
-              
-          </div>
-         </div>
-  
+    <div class="leftMenu">
+        <app-menu></app-menu>
+    </div>
+    <div class="content">
+        <p>Sonido</p>
+        <div class="contentData">
+            <div class="data-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Último Valor</th>
+                            <th>Fecha de Creación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let feed of feedData | keyvalue">
+                            <ng-container *ngIf="isFeedData2(feed.value)">  
+                                <td>{{ feed.value.feed_key }}</td>
+                                <td>{{ feed.value.value }}</td>
+                                <td>{{ feed.value.created_at }}</td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="filters">
+                <form>
+                    <div class="formDiv">
+                        <p>Fecha de creacion</p>
+                        <select name="" id="">
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="formDiv">
+                        <p>Fecha de Expiracion</p>
+                        <select name="" id="">
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                        <button>Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>

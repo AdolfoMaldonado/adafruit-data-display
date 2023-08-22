@@ -17,10 +17,10 @@
                     <tbody>
                         <tr *ngFor="let feed of feedData | keyvalue">
                             <ng-container *ngIf="isFeedData2(feed.value)">
-                                
-                                <td>{{ feed.value.feed_key }}</td>
+                                 <td>{{ feed.value.feed_key }}</td>
                                 <td>{{ feed.value.value }}</td>
                                 <td>{{ feed.value.created_at }}</td>
+                                
                             </ng-container>
                         </tr>
                     </tbody>
