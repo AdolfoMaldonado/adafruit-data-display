@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 export interface FeedData {
   id: string;
   value: string;
@@ -9,6 +10,7 @@ export interface FeedData {
   created_epoch: number;
   expiration: string;
 }
+
 @Component({
   selector: 'app-liminosidad',
   templateUrl: './luminity-table.component.html',
@@ -44,7 +46,10 @@ export class LuminityTableComponent implements OnInit {
       .then((response) => response.json())
       .then((data: { status: string; datos: FeedData[] }) => {
         if (data.status === 'ok') {
-          this.feedData = data.datos;
+          this.feedData = data.datos.map((item: FeedData) => ({
+            ...item,
+            value: item.value === '0' ? 'Apagado' : 'Encendido',
+          }));
         } else {
           // Manejar algún tipo de error si la respuesta no es 'ok'
         }

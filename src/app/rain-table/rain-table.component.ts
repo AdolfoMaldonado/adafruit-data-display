@@ -10,6 +10,7 @@ export interface FeedData {
   created_epoch: number;
   expiration: string;
 }
+
 @Component({
   selector: 'app-humedad',
   templateUrl: './rain-table.component.html',
@@ -54,9 +55,11 @@ export class RainTableComponent implements OnInit {
       .then((response) => response.json())
       .then((data: { status: string; datos: FeedData[] }) => {
         if (data.status === 'ok') {
-          this.feedData = data.datos;
-          this.getUniqueDates(); // Actualizar fechas únicas
-          this.applyFilters();
+          this.feedData = data.datos.map((item: FeedData) => ({
+            ...item,
+            value: item.value === '0' ? 'Apagado' : 'Encendido',
+          }));
+          
         } else {
           // Manejar algún tipo de error si la respuesta no es 'ok'
         }
@@ -64,46 +67,5 @@ export class RainTableComponent implements OnInit {
       .catch((error) => {
         // Manejar errores en la solicitud
       });
-  }
-  applyFilters() {
-    console.log('Selected Start Date:', this.selectedStartDate);
-    console.log('Selected End Date:', this.selectedEndDate);
-
-    const startDate = new Date(this.selectedStartDate);
-    const endDate = new Date(this.selectedEndDate);
-
-    if (
-      this.selectedStartDate &&
-      this.selectedEndDate &&
-      startDate.getTime() === endDate.getTime()
-    ) {
-      this.showSameDateError = true;
-      return;
-    }
-
-    this.showSameDateError = false;
-
-    this.feedDataFiltered = this.feedData.filter((data) => {
-      const dataDate = new Date(data.created_at);
-
-      if (this.selectedStartDate && dataDate < startDate) {
-        return false;
-      }
-      if (this.selectedEndDate && dataDate > endDate) {
-        return false;
-      }
-      return true;
-    });
-  }
-
-  getUniqueDates() {
-    const uniqueCreationDates = new Set<string>();
-    const uniqueExpirationDates = new Set<string>();
-    for (const data of this.feedData) {
-      uniqueCreationDates.add(data.created_at);
-      uniqueExpirationDates.add(data.expiration);
-    }
-    this.uniqueCreationDates = Array.from(uniqueCreationDates);
-    this.uniqueExpirationDates = Array.from(uniqueExpirationDates);
   }
 }
