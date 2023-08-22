@@ -1,59 +1,107 @@
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    background-color: #553c2585;
-    color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden; // Evita el desplazamiento horizontal
+}
+
+.menu-container {
+  position: relative;
+  display: flex;
+}
+
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+
+  .hamburger {
+    width: 30px;
+    height: 3px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
   }
-  
+
+  &.active {
+    .hamburger {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(0, 0);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(0, 0);
+      }
+    }
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0; // Cambia a 0 para que el menú esté inicialmente oculto
+  width: 100px;
+  height: 100%;
+  background-color: #553c2585;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+  z-index: 1000;
+
+  &.active {
+    left: -250px; // Mostrar el menú
+  }
+
   .navbar__links {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
-    padding: 0 20px;
-    overflow-x: auto;
+    margin-top: 20px;
   }
-  
+
   .navbar__link {
     color: #ffffff;
     text-decoration: none;
     font-weight: bold;
-    margin: 0 10px;
+    margin-bottom: 10px;
     transition: color 0.3s;
-  
+
     &:hover {
       color: #f39c12;
     }
   }
-  
+
   .navbar__divider {
-    width: 1px;
-    height: 20px;
+    width: 100%;
+    height: 1px;
     background-color: rgba(255, 255, 255, 0.3);
-    margin: 0 10px;
+    margin: 10px 0;
+  }
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .logo-image {
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
   }
 
-  .navbar__logo {
-    width: 100px; /* Ajusta el ancho deseado para el contenedor del logo */
-    display: flex;
-    align-items: center;
-  }
   
-  .logo-image {
-    max-width: 100%; /* La imagen se ajustará al ancho del contenedor */
-    height: auto; /* La altura se ajustará automáticamente */
-    margin: 0; /* Elimina los márgenes */
-    padding: 0; /* Elimina el padding */
-  }
-  
-  /* Resto de tus estilos para el navbar */
-  
-  
+}
