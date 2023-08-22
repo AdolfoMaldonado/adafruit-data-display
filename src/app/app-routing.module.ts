@@ -6,6 +6,8 @@ import { RainTableComponent } from './rain-table/rain-table.component';
 import { SoundTableComponent } from './sound-table/sound-table.component';
 import { TemperatureTableComponent } from './temperature-table/temperature-table.component';
 import {DashboardComponent} from './dashboard/dashboard.component'
+import { DistanceTableComponent } from './distance-table/distance-table.component';
+import { LuminityTableComponent } from './luminity-table/luminity-table.component';
 
 
 const routes: Routes = [
@@ -16,7 +18,8 @@ const routes: Routes = [
   { path: 'lluvia', component: RainTableComponent },
   { path: 'sonido', component: SoundTableComponent },
   { path: 'temperatura', component: TemperatureTableComponent },
- 
+  { path: 'proximidad', component: DistanceTableComponent },
+  { path: 'luminosidad', component: LuminityTableComponent },
 ];
 
 @NgModule({

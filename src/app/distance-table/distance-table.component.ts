@@ -36,7 +36,7 @@ export class DistanceTableComponent implements OnInit {
   }
 
   getDataFromApi() {
-    fetch('http://localhost:8000/api/datos/distancia', {
+    fetch('http://localhost:8000/api/datos/proximidad', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
