@@ -17,6 +17,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LuminityTableComponent } from './luminity-table/luminity-table.component';
+import { DistanceTableComponent } from './distance-table/distance-table.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     DashboardComponent,
     MenuComponent,
-    NavbarComponent
+    NavbarComponent,
+    LuminityTableComponent,
+    DistanceTableComponent
   ],
   imports: [
     BrowserModule,

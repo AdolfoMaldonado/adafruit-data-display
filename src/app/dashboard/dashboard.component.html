@@ -19,6 +19,12 @@
                     <div class="swiper-slide">
                         <p>Lluvia: {{ getLatestValue('lluvia') }}</p>
                     </div>
+                    <div class="swiper-slide">
+                        <p>Distancia: {{ getLatestValue('distancia') }}</p>
+                    </div>
+                    <div class="swiper-slide">
+                        <p>Luminosidad: {{ getLatestValue('luminosidad') }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -27,7 +33,6 @@
             <button class="update-btn" (click)="updateData()">Actualizar Datos</button>
             <button class="update-btn" (click)="changeInterval(30000)">30s</button>
             <button class="update-btn" (click)="changeInterval(15000)">15s</button>
-            <button class="update-btn" (click)="changeInterval(120000)">2min</button>
         </div>
     </div>
 </section>

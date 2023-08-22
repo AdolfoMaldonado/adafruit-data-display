@@ -61,11 +61,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     console.log('Updating data manually...');
     this.getDataFromApi();
   }
-
- 
-
-  
-
   changeInterval(newInterval: number) {
     console.log('Changing interval to:', newInterval);
     this.clearInterval();
