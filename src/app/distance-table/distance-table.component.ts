@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 export interface FeedData {
   id: string;
   value: string;
@@ -9,6 +10,7 @@ export interface FeedData {
   created_epoch: number;
   expiration: string;
 }
+
 @Component({
   selector: 'app-distance',
   templateUrl: './distance-table.component.html',
@@ -16,6 +18,9 @@ export interface FeedData {
 })
 export class DistanceTableComponent implements OnInit {
   feedData: FeedData[] = [];
+  filteredFeedData: FeedData[] = []; // Added for filtered data
+  startDate: string = '';
+  endDate: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -36,21 +41,44 @@ export class DistanceTableComponent implements OnInit {
   }
 
   getDataFromApi() {
-    fetch('http://localhost:8000/api/datos/proximidad', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data: { status: string; datos: FeedData[] }) => {
-        if (data.status === 'ok') {
-          this.feedData = data.datos;
-        } else {
-          // Manejar algún tipo de error si la respuesta no es 'ok'
+    const url = 'http://localhost:8000/api/datos/proximidad';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    });
+
+    this.http
+      .get<{ status: string; datos: FeedData[] }>(url, { headers })
+      .subscribe(
+        (data) => {
+          if (data.status === 'ok') {
+            this.feedData = data.datos;
+            this.applyDateFilter(); // Apply initial filter
+          } else {
+            // Handle error if response is not 'ok'
+          }
+        },
+        (error) => {
+          // Handle errors in the request
         }
-      })
-      .catch((error) => {
-        // Manejar errores en la solicitud
-      });
+      );
+  }
+
+  applyDateFilter() {
+    const filteredData = this.filterByDates(this.feedData);
+    this.filteredFeedData = filteredData;
+  }
+
+  filterByDates(data: FeedData[]): FeedData[] {
+    if (!this.startDate || !this.endDate) {
+      return data;
+    }
+
+    return data.filter((entry) => {
+      const createdAt = new Date(entry.created_at);
+      return (
+        createdAt >= new Date(this.startDate) &&
+        createdAt <= new Date(this.endDate)
+      );
+    });
   }
 }

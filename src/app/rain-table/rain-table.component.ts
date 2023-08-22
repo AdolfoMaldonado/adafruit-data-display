@@ -12,21 +12,15 @@ export interface FeedData {
 }
 
 @Component({
-  selector: 'app-humedad',
+  selector: 'app-lluvia',
   templateUrl: './rain-table.component.html',
   styleUrls: ['./rain-table.component.scss'],
 })
 export class RainTableComponent implements OnInit {
   feedData: FeedData[] = [];
-  feedDataFiltered: FeedData[] = [];
-
-  selectedCreationDate: string = '';
-  selectedExpirationDate: string = '';
-  selectedStartDate: string = ''; // Agrega esta línea
-  selectedEndDate: string = '';
-  uniqueCreationDates: string[] = [];
-  uniqueExpirationDates: string[] = [];
-  showSameDateError: boolean = false;
+  filteredFeedData: FeedData[] = []; // Added for filtered data
+  startDate: string = '';
+  endDate: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -34,7 +28,7 @@ export class RainTableComponent implements OnInit {
     this.getDataFromApi();
     setInterval(() => {
       this.getDataFromApi();
-    }, 7000);
+    }, 3000);
   }
 
   isFeedData2(value: any): value is FeedData {
@@ -47,25 +41,47 @@ export class RainTableComponent implements OnInit {
   }
 
   getDataFromApi() {
-    fetch('http://localhost:8000/api/datos/lluvia', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data: { status: string; datos: FeedData[] }) => {
-        if (data.status === 'ok') {
-          this.feedData = data.datos.map((item: FeedData) => ({
-            ...item,
-            value: item.value === '0' ? 'Apagado' : 'Encendido',
-          }));
-          
-        } else {
-          // Manejar algún tipo de error si la respuesta no es 'ok'
+    const url = 'http://localhost:8000/api/datos/lluvia';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    });
+
+    this.http
+      .get<{ status: string; datos: FeedData[] }>(url, { headers })
+      .subscribe(
+        (data) => {
+          if (data.status === 'ok') {
+            this.feedData = data.datos.map((item: FeedData) => ({
+              ...item,
+              value: item.value === '0' ? 'Apagado' : 'Encendido',
+            }));
+            this.applyDateFilter(); // Apply initial filter
+          } else {
+            // Handle error if response is not 'ok'
+          }
+        },
+        (error) => {
+          // Handle errors in the request
         }
-      })
-      .catch((error) => {
-        // Manejar errores en la solicitud
-      });
+      );
+  }
+
+  applyDateFilter() {
+    const filteredData = this.filterByDates(this.feedData);
+    this.filteredFeedData = filteredData;
+  }
+
+  filterByDates(data: FeedData[]): FeedData[] {
+    if (!this.startDate || !this.endDate) {
+      return data;
+    }
+
+    return data.filter((entry) => {
+      const createdAt = new Date(entry.created_at);
+      return (
+        createdAt >= new Date(this.startDate) &&
+        createdAt <= new Date(this.endDate)
+      );
+    });
   }
 }

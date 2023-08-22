@@ -4,6 +4,15 @@
     </div>
     <div class="content">
         <p>Humedad</p>
+        <div class="filter-container">
+            <label for="startDate">Fecha de inicio:</label>
+            <input type="date" id="startDate" [(ngModel)]="startDate">
+            
+            <label for="endDate">Fecha de fin:</label>
+            <input type="date" id="endDate" [(ngModel)]="endDate">
+            
+            <button (click)="applyDateFilter()">Aplicar filtro</button>
+        </div>
         <div class="contentData">
             <div class="data-container">
                 <table>
@@ -15,35 +24,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let feed of feedData | keyvalue">
+                        <tr *ngFor="let feed of filteredFeedData | keyvalue">
                             <ng-container *ngIf="isFeedData2(feed.value)">
-                                 <td>{{ feed.value.feed_key }}</td>
+                                <td>{{ feed.value.feed_key }}</td>
                                 <td>{{ feed.value.value }}</td>
                                 <td>{{ feed.value.created_at }}</td>
-                                
                             </ng-container>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="filters">
-                <form>
-                    <div class="formDiv">
-                        <p>Fecha de creacion</p>
-                        <select name="" id="">
-                            <option value=""></option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                    <div class="formDiv">
-                        <p>Fecha de Expiracion</p>
-                        <select name="" id="">
-                            <option value="">asd</option>
-                            <option value="">asd</option>
-                        </select>
-                        <button>Buscar</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
