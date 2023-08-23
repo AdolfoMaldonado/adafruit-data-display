@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { parseISO } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 
 export interface FeedData {
   id: string;
@@ -18,7 +20,7 @@ export interface FeedData {
 })
 export class LuminityTableComponent implements OnInit {
   feedData: FeedData[] = [];
-  filteredFeedData: FeedData[] = []; // Added for filtered data
+  filteredFeedData: FeedData[] = [];
   startDate: string = '';
   endDate: string = '';
 
@@ -53,9 +55,10 @@ export class LuminityTableComponent implements OnInit {
           if (data.status === 'ok') {
             this.feedData = data.datos.map((item: FeedData) => ({
               ...item,
-              value: item.value === '0' ? 'Encendido' : 'Apagado',
+              value: item.value === '0' ? 'Apagado' : 'Encendido',
+              created_at: this.convertToMonterreyTime(item.created_at),
             }));
-            this.applyDateFilter(); // Apply initial filter
+            this.applyDateFilter();
           } else {
             // Handle error if response is not 'ok'
           }
@@ -64,6 +67,11 @@ export class LuminityTableComponent implements OnInit {
           // Handle errors in the request
         }
       );
+  }
+
+  convertToMonterreyTime(utcTime: string): string {
+    const monterreyTime = utcToZonedTime(parseISO(utcTime), 'America/Monterrey');
+    return monterreyTime.toISOString(); // Formatear como necesario
   }
 
   applyDateFilter() {

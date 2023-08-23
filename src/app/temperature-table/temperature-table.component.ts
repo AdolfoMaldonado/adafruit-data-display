@@ -12,7 +12,7 @@ export interface FeedData {
 }
 
 @Component({
-  selector: 'app-temperatura',
+  selector: 'app-temperature',
   templateUrl: './temperature-table.component.html',
   styleUrls: ['./temperature-table.component.scss'],
 })
