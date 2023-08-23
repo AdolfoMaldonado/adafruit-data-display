@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-image: url('/assets/imagen/estacionamiento2.jpg');
+    background-image: url('/assets/imagen/estacionamiento3.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     align-items: center;
@@ -17,7 +17,7 @@
             rgba(255, 255, 255, 0.493) 0px 1px 2px;
         background-color: rgba(0, 0, 0, 0.445);
         .containerLogin__content--title {
-            color: black;
+            color: rgb(250, 247, 247);
             width: 100%;
             display: flex;
             justify-content: center;
@@ -34,7 +34,7 @@
                 display: flex;
                 flex-direction: column;
                 label {
-                    color: black;
+                    color: rgb(254, 253, 253);
                     font-size: 18px;
                     margin-top: 2vh;
                 }
@@ -83,6 +83,7 @@
         }
     }
     .containerLogin__content:nth-of-type(2) {
+        margin-right: 500px;
         border-radius: 10px;
         box-shadow:
             rgba(0, 0, 0, 0.493) 0px 1px 3px,

@@ -53,7 +53,7 @@ export class RainTableComponent implements OnInit {
           if (data.status === 'ok') {
             this.feedData = data.datos.map((item: FeedData) => ({
               ...item,
-              value: item.value === '0' ? 'Apagado' : 'Encendido',
+              value: item.value === '0' ? 'Encendido' : 'Apagado',
             }));
             this.applyDateFilter(); // Apply initial filter
           } else {
