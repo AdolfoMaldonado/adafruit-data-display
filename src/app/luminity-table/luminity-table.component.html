@@ -1,39 +1,39 @@
 <section class="body">
-  <div class="leftMenu">
-    <app-menu></app-menu>
-  </div>
-  <div class="content">
-    <p>Luminosidad</p>
-    <div class="filter-container">
-      <label for="startDate">Fecha de inicio:</label>
-      <input type="date" id="startDate" [(ngModel)]="startDate">
-
-      <label for="endDate">Fecha de fin:</label>
-      <input type="date" id="endDate" [(ngModel)]="endDate">
-
-      <button (click)="applyDateFilter()">Aplicar filtro</button>
+    <div class="leftMenu">
+        <app-menu></app-menu>
     </div>
-    <div class="contentData">
-      <div class="data-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Último Valor</th>
-              <th>Fecha de Creación</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let feed of filteredFeedData">
-              <ng-container *ngIf="isFeedData2(feed)">
-                <td>{{ feed.feed_key }}</td>
-                <td>{{ feed.value }}</td>
-                <td>{{ convertToMonterreyTime(feed.created_at) | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-              </ng-container>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="content">
+        <p>Luminosidad</p>
+        <div class="filter-container">
+            <label for="startDate">Fecha de inicio:</label>
+            <input type="date" id="startDate" [(ngModel)]="startDate">
+            
+            <label for="endDate">Fecha de fin:</label>
+            <input type="date" id="endDate" [(ngModel)]="endDate">
+            
+            <button (click)="applyDateFilter()">Aplicar filtro</button>
+        </div>
+        <div class="contentData">
+            <div class="data-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Último Valor</th>
+                            <th>Fecha de Creación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let feed of filteredFeedData | keyvalue">
+                            <ng-container *ngIf="isFeedData2(feed.value)">
+                                <td>{{ feed.value.feed_key }}</td>
+                                <td>{{ feed.value.value }}</td>
+                                <td>{{ feed.value.created_at }}</td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </section>

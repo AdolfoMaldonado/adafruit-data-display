@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
 export interface FeedData {
@@ -14,7 +14,7 @@ export interface FeedData {
 }
 
 @Component({
-  selector: 'app-liminosidad',
+  selector: 'app-luminosidad',
   templateUrl: './luminity-table.component.html',
   styleUrls: ['./luminity-table.component.scss'],
 })
@@ -53,11 +53,14 @@ export class LuminityTableComponent implements OnInit {
       .subscribe(
         (data) => {
           if (data.status === 'ok') {
-            this.feedData = data.datos.map((item: FeedData) => ({
-              ...item,
-              value: item.value === '0' ? 'Apagado' : 'Encendido',
-              created_at: this.convertToMonterreyTime(item.created_at),
-            }));
+            // Convert timestamps to America/Monterrey timezone using date-fns-tz
+            this.feedData = data.datos.map((entry: FeedData) => {
+              const createdAtUTC = parseISO(entry.created_at);
+              const americaMonterreyTime = utcToZonedTime(createdAtUTC, 'America/Monterrey');
+              const formattedTime = format(americaMonterreyTime, 'yyyy-MM-dd HH:mm:ss');
+              return { ...entry, created_at: formattedTime, value: entry.value === '0' ? 'Apagado' : 'Encendido' };
+            });
+
             this.applyDateFilter();
           } else {
             // Handle error if response is not 'ok'
@@ -69,11 +72,6 @@ export class LuminityTableComponent implements OnInit {
       );
   }
 
-  convertToMonterreyTime(utcTime: string): string {
-    const monterreyTime = utcToZonedTime(parseISO(utcTime), 'America/Monterrey');
-    return monterreyTime.toISOString(); // Formatear como necesario
-  }
-
   applyDateFilter() {
     const filteredData = this.filterByDates(this.feedData);
     this.filteredFeedData = filteredData;
@@ -83,13 +81,19 @@ export class LuminityTableComponent implements OnInit {
     if (!this.startDate || !this.endDate) {
       return data;
     }
-
-    return data.filter((entry) => {
+  
+    const startDateTime = new Date(this.startDate + 'T00:00:00');
+    const endDateTime = new Date(this.endDate + 'T23:59:59');
+  
+    const filteredData = data.filter((entry) => {
       const createdAt = new Date(entry.created_at);
       return (
-        createdAt >= new Date(this.startDate) &&
-        createdAt <= new Date(this.endDate)
+        (createdAt >= startDateTime && createdAt <= endDateTime) ||
+        createdAt.getTime() === startDateTime.getTime() ||
+        createdAt.getTime() === endDateTime.getTime()
       );
     });
+  
+    return filteredData;
   }
 }

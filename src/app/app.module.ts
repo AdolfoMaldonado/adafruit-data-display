@@ -19,6 +19,8 @@ import { MenuComponent } from './menu/menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LuminityTableComponent } from './luminity-table/luminity-table.component';
 import { DistanceTableComponent } from './distance-table/distance-table.component';
+import { NgxPaginationModule } from 'ngx-pagination'
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -43,9 +45,13 @@ import { DistanceTableComponent } from './distance-table/distance-table.componen
     MatProgressSpinnerModule,
     MatIconModule,
     ReactiveFormsModule,
+    NgxPaginationModule,// Agrega esta línea
+   
+
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

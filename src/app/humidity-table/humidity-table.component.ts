@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { format, parseISO } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 
 export interface FeedData {
   id: string;
@@ -18,7 +20,7 @@ export interface FeedData {
 })
 export class HumidityTableComponent implements OnInit {
   feedData: FeedData[] = [];
-  filteredFeedData: FeedData[] = []; // Added for filtered data
+  filteredFeedData: FeedData[] = [];
   startDate: string = '';
   endDate: string = '';
 
@@ -51,8 +53,15 @@ export class HumidityTableComponent implements OnInit {
       .subscribe(
         (data) => {
           if (data.status === 'ok') {
-            this.feedData = data.datos;
-            this.applyDateFilter(); // Apply initial filter
+            // Convert timestamps to America/Monterrey timezone using date-fns-tz
+            this.feedData = data.datos.map((entry) => {
+              const createdAtUTC = parseISO(entry.created_at);
+              const americaMonterreyTime = utcToZonedTime(createdAtUTC, 'America/Monterrey');
+              const formattedTime = format(americaMonterreyTime, 'yyyy-MM-dd HH:mm:ss');
+              return { ...entry, created_at: formattedTime };
+            });
+
+            this.applyDateFilter();
           } else {
             // Handle error if response is not 'ok'
           }
@@ -72,13 +81,19 @@ export class HumidityTableComponent implements OnInit {
     if (!this.startDate || !this.endDate) {
       return data;
     }
-
-    return data.filter((entry) => {
+  
+    const startDateTime = new Date(this.startDate + 'T00:00:00');
+    const endDateTime = new Date(this.endDate + 'T23:59:59');
+  
+    const filteredData = data.filter((entry) => {
       const createdAt = new Date(entry.created_at);
       return (
-        createdAt >= new Date(this.startDate) &&
-        createdAt <= new Date(this.endDate)
+        (createdAt >= startDateTime && createdAt <= endDateTime) ||
+        createdAt.getTime() === startDateTime.getTime() ||
+        createdAt.getTime() === endDateTime.getTime()
       );
     });
+  
+    return filteredData;
   }
 }
